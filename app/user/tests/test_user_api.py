@@ -1,5 +1,5 @@
 """
-Test for the user API
+Tests for the user API
 """
 from django.test import TestCase
 from django.contrib.auth import get_user_model
@@ -17,8 +17,8 @@ def create_user(**params):
     return get_user_model().objects.create_user(**params)
 
 
-class PublicUserApiTest(TestCase):
-    """Test the public futures of the user API"""
+class PublicUserApiTests(TestCase):
+    """Test the public features of the user API"""
     def setUp(self):
         self.client = APIClient
 
@@ -26,7 +26,7 @@ class PublicUserApiTest(TestCase):
         """Test creating a user is successful"""
         payload = {
             'email': 'test@example.com',
-            'password': 'test123',
+            'password': 'testpass123',
             'name': 'Test Name',
         }
         res = self.client.post(CREATE_USER_URL, payload)
@@ -40,11 +40,10 @@ class PublicUserApiTest(TestCase):
         """Test error returned if user with email exists"""
         payload = {
             'email': 'test@example.com',
-            'password': 'test123',
+            'password': 'testpass123',
             'name': 'Test Name',
         }
         create_user(**payload)
-
         res = self.client.post(CREATE_USER_URL, payload)
 
         self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)
