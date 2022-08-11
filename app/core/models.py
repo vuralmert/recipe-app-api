@@ -67,7 +67,8 @@ class Tag(models.Model):
     name = models.CharField(max_length=255)
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,  # If user is deleted, tags associated to that user will also be deleted
+        on_delete=models.CASCADE,
+        # If user is deleted, tags associated to that user will also be deleted
     )
 
     def __str__(self):
