@@ -13,9 +13,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import environ
 
-BASE_DIR = Path(__file__).resolve().parent.parent
 
-print(BASE_DIR)
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 # reading .env file
 env = environ.Env(
@@ -87,7 +86,7 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': env('DATABASE_ENGINE'),
         'HOST': env('DATABASE_HOST'),
         'NAME': env('DATABASE_NAME'),
         'USER': env('DATABASE_USER'),
